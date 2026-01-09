@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "../public")));
 
-// WEB UI
+// UI
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
@@ -106,7 +106,7 @@ app.post("/receive-new-block", function (req, res) {
   }
 });
 
-// REGISTRATION
+// REGISTRATION & AUTO SYNC
 app.post("/register-and-broadcast-node", function (req, res) {
   const newNodeUrl = req.body.newNodeUrl;
   if (bitcoin.networkNodes.indexOf(newNodeUrl) == -1)
@@ -164,11 +164,9 @@ app.post("/register-nodes-bulk", function (req, res) {
   res.json({ note: "Bulk registration successful." });
 });
 
-// START SERVER & AUTO SYNC
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`);
 
-  // AUTO-SYNC LOGIC: Connects non-master nodes to port 3001
   if (port !== "3001") {
     const registerOptions = {
       uri: "http://localhost:3001/register-and-broadcast-node",
@@ -182,6 +180,6 @@ app.listen(port, function () {
         .catch((err) =>
           console.log(`❌ AUTO-SYNC FAILED: Ensure Node 3001 is running.`)
         );
-    }, 5000); // 5 Seconds delay
+    }, 5000);
   }
 });

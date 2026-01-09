@@ -7,7 +7,8 @@ function Blockchain() {
   this.pendingTransactions = [];
   this.currentNodeUrl = currentNodeUrl;
   this.networkNodes = [];
-  this.createNewBlock(100, "0", "0"); // Genesis Block
+  // Genesis Block (Blok Awal Sistem PharmaTrust)
+  this.createNewBlock(100, "0", "0");
 }
 
 Blockchain.prototype.createNewBlock = function (
@@ -32,15 +33,16 @@ Blockchain.prototype.getLastBlock = function () {
   return this.chain[this.chain.length - 1];
 };
 
+// USE CASE: Supply Chain Obat
 Blockchain.prototype.createNewTransaction = function (
   amount,
   sender,
   recipient
 ) {
   const newTransaction = {
-    amount: amount, // Data: Gelar/IPK
-    sender: sender, // Data: Universitas
-    recipient: recipient, // Data: Nama Mahasiswa
+    amount: amount, // Data: Batch ID / Nama Obat / Exp Date
+    sender: sender, // Data: Pabrik Obat (Manufacturer)
+    recipient: recipient, // Data: Apotek / Rumah Sakit
     transactionId: uuid.v1().split("-").join(""),
   };
   return newTransaction;

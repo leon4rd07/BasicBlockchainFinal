@@ -2,20 +2,20 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Academic Blockchain</title>
+    <title>PharmaTrust Supply Chain</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .block-card { border-left: 5px solid #0d6efd; margin-bottom: 20px; }
-        .genesis { border-left-color: #198754; }
+        .block-card { border-left: 5px solid #198754; margin-bottom: 20px; }
+        .genesis { border-left-color: #ffc107; }
         .data-scroll { max-height: 150px; overflow-y: auto; background: #f8f9fa; padding: 10px; font-size: 0.9em; }
     </style>
 </head>
 <body class="bg-light">
 
-<nav class="navbar navbar-dark bg-primary mb-4">
+<nav class="navbar navbar-dark bg-success mb-4">
     <div class="container">
-        <span class="navbar-brand mb-0 h1" id="node-title">Blockchain Node</span>
-        <button class="btn btn-warning btn-sm" onclick="mineBlock()">⛏️ Mining Block Baru</button>
+        <span class="navbar-brand mb-0 h1" id="node-title">PharmaTrust Node</span>
+        <button class="btn btn-warning btn-sm" onclick="mineBlock()">⛏️ Validasi & Mining Block</button>
     </div>
 </nav>
 
@@ -23,35 +23,44 @@
     <div class="row">
         <div class="col-md-4">
             <div class="card shadow-sm mb-4">
-                <div class="card-header bg-white"><h5 class="mb-0">📝 Input Sertifikat</h5></div>
+                <div class="card-header bg-white">
+                    <h5 class="mb-0 text-success">💊 Input Logistik Obat</h5>
+                </div>
                 <div class="card-body">
                     <form id="transactionForm">
                         <div class="mb-3">
-                            <label class="form-label">Nama Mahasiswa</label>
-                            <input type="text" class="form-control" id="recipient" placeholder="Contoh: Leonardo" required>
+                            <label class="form-label">Tujuan (Apotek / RS)</label>
+                            <input type="text" class="form-control" id="recipient" placeholder="Contoh: RS Siloam, Apotek K-24" required>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Universitas</label>
-                            <input type="text" class="form-control" id="sender" value="Binus University" readonly>
+                            <label class="form-label">Produsen / Pabrik</label>
+                            <input type="text" class="form-control" id="sender" value="PT Bio Farma (Persero)" readonly>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Gelar / IPK</label>
-                            <input type="text" class="form-control" id="amount" placeholder="S.Kom - 3.90" required>
+                            <label class="form-label">Detail Obat (Batch & Exp)</label>
+                            <textarea class="form-control" id="amount" rows="2" placeholder="Vaksin COVID-19 - Batch #BF9921 - Exp 2028" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Broadcast Transaksi</button>
+                        <button type="submit" class="btn btn-success w-100">Broadcast Pengiriman</button>
                     </form>
                 </div>
             </div>
+
             <div class="card shadow-sm">
-                <div class="card-header bg-warning text-dark"><h6 class="mb-0">⏳ Pending Transactions</h6></div>
+                <div class="card-header bg-warning text-dark">
+                    <h6 class="mb-0">⏳ Pending Shipments (Mempool)</h6>
+                </div>
                 <div class="card-body">
-                    <ul id="pending-list" class="list-group list-group-flush"><li class="list-group-item text-muted">Kosong...</li></ul>
+                    <ul id="pending-list" class="list-group list-group-flush">
+                        <li class="list-group-item text-muted">Belum ada pengiriman...</li>
+                    </ul>
                 </div>
             </div>
         </div>
+
         <div class="col-md-8">
-            <h4 class="mb-3">🔗 Blockchain Ledger</h4>
-            <div id="chain-container"></div>
+            <h4 class="mb-3 text-success">🔗 PharmaTrust Ledger</h4>
+            <div id="chain-container">
+                </div>
         </div>
     </div>
 </div>
